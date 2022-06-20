@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    restart: always
+    networks:
+      - erpsolution-network
+    volumes:
+      - mongo-data:/data/db
+
+  erp-back:
+    image: erp-back
+    ports:
+      - 9090:9090
+    networks:
+      - erpsolution-network
+    depends_on:
+      - mongo
+    restart: always
+    environment:
+      - PORT=9090
+      - MONGO_URI=mongodb://mongo:27017/
+      - DATABASE_NAME=erp_db
+      - JWT_SECRET=HDQvXGjDXwJ6JAqDqX8RA5KxJcOHUco4MueTGunshBXAUmyQyWQDOCbA4dcMvxo
+      - JWT_HOURS_DURATION=5
+      - ERPGATEWAY_URL=http://erp-gateway:8080
+
+  erp-gateway:
+    image: erp-gateway
+    ports:
+      - 8080:8080
+    networks:
+      - erpsolution-network
+    restart: always
+    environment:
+      - GIN_MODE=release
+      - ERPBACK_URL=http://erp-back:9090/
+      - ERPREGISTRATION_URL=http://erp-registration:7070/
+
+  erp-registration:
+    image: erp-registration
+    ports:
+      - 7070:7070
+    networks:
+      - erpsolution-network
+    restart: always
+    environment:
+      - HOST=in-v3.mailjet.com
+      - PORT=587
+      - USER=2792b8496686e1475ef2be4fb2252708
+      - SECRET=d89aaaa3d7521bf251c4a8c558be334d
+      - EMAIL=erpsolution@outlook.es
+      - SERVER_PORT=7070
+      - JWT_SECRET=QxSl3YWIt%a2KoaoUTqGXUx3180&gsSl_wBttlROel3Ax59sgHe&za2MNydaO&lc
+      - URL=http://erp-gateway
+      - ERPGATEWAY_URL=http://erp-gateway:8080/api/graphql
+
+networks:
+  erpsolution-network:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
