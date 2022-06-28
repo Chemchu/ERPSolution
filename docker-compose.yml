@@ -41,7 +41,7 @@ services:
       - GIN_MODE=${GATEWAY_GIN_MODE}
       - ERPBACK_URL=${GATEWAY_ERPBACK_URL}
       - ERPREGISTRATION_URL=${GATEWAY_ERPREGISTRATION_URL}
-
+      - ERPANALYSIS_URL=${}
   erp-registration:
     image: chemchu/erp-registration
     ports:
@@ -71,8 +71,6 @@ services:
     depends_on:
       - erp-gateway
     restart: always
-    environment:
-      - ERPGATEWAY_URL=${ANALYTICS_ERPGATEWAY_URL}
 
 networks:
   erpsolution-network:
