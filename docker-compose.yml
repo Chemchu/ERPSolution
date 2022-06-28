@@ -71,6 +71,8 @@ services:
     depends_on:
       - erp-gateway
     restart: always
+    environment:
+      - ERPGATEWAY_URL=${ANALYTICS_ERPGATEWAY_URL}
 
 networks:
   erpsolution-network:
