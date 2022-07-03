@@ -42,6 +42,8 @@ services:
       - ERPBACK_URL=${GATEWAY_ERPBACK_URL}
       - ERPREGISTRATION_URL=${GATEWAY_ERPREGISTRATION_URL}
       - ERPANALYSIS_URL=${GATEWAY_ERPANALYSIS_URL}
+      - TIMEZONE=${TIMEZONE}
+
   erp-registration:
     image: chemchu/erp-registration
     ports:
