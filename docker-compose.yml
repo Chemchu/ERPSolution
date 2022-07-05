@@ -31,7 +31,7 @@ services:
   erp-gateway:
     image: chemchu/erp-gateway
     ports:
-      - 8080:8080
+      - 80:80
     networks:
       - erpsolution-network
     depends_on:
