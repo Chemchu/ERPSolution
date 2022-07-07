@@ -55,7 +55,6 @@ services:
       - erp-gateway
     restart: always
     environment:
-      - HOST=${REGISTRATION_HOST}
       - PORT=${REGISTRATION_PORT}
       - USER=${REGISTRATION_USER}
       - SECRET=${REGISTRATION_SECRET}
