@@ -19,6 +19,7 @@ services:
       - erpsolution-network
     depends_on:
       - mongo
+      - erp-recommender
     restart: always
     environment:
       - PORT=${BACK_PORT}
@@ -72,6 +73,14 @@ services:
       - erpsolution-network
     depends_on:
       - erp-gateway
+    restart: always
+
+  erp-recommender:
+    image: chemchu/erp-recommender
+    ports:
+      - 5000:5000
+    networks:
+      - erpsolution-network
     restart: always
 
 networks:
