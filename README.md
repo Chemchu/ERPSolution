@@ -1,2 +1,2 @@
 # ERPSolutionComposer
-Simple docker-compose para arrancar los contenedores necesarios para arrancar ERPSolution 
+Simple docker-compose para arrancar los contenedores necesarios de ERPSolution 
